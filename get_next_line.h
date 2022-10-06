@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:16 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/06 16:20:58 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/06 18:32:26 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
+char	*remove_nl(char *str);
+int		found_nl(char *str);
 
 #endif
