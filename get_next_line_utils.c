@@ -6,23 +6,11 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:19 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/06 18:32:12 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/07 14:12:00 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int	found_nl(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	if (str[i] == '\n')
-		return (1);
-	return (0);
-}
 
 char	*ft_strndup(char *str, int n)
 {
@@ -45,30 +33,43 @@ char	*ft_strndup(char *str, int n)
 	return (dup);
 }
 
-char	*remove_nl(char *str)
+int	found_nl(char *str)
 {
-	char	*before_nl;
-	char	*after_nl;
-	int		before_nl_len;
-	int		after_nl_len;
+	int	i;
 
-	before_nl_len = 0;
-	while (str[before_nl_len] != '\n')
-		before_nl_len++;
-	before_nl = ft_strndup(str, before_nl_len + 1);
-	if (before_nl)
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (str[i] == '\n')
+		return (1);
+	return (0);
+}
+
+char	*ft_strjoin_and_free(char *line, char *buf, int buf_len)
+{
+	int		i;
+	int		j;
+	char	*new_line;
+
+	i = 0;
+	while (line[i])
+		i++;
+	new_line = malloc((i + buf_len + 1) * sizeof(char));
+	if (!new_line)
+		return (gnl_free(line, buf));
+	i = 0;
+	while (line[i])
 	{
-		after_nl_len = 0;
-		while (str[before_nl_len + after_nl_len])
-			after_nl_len++;
-		after_nl = ft_strndup(&str[before_nl_len + 1], after_nl_len);
-		if (!after_nl)
-		{
-			free(before_nl);
-			return (0);
-		}
+		new_line[i] = line[i];
+		i++;
 	}
-	free(str);
-	str = after_nl;
-	return (before_nl);
+	j = 0;
+	while (j < buf_len)
+	{
+		new_line[i + j] = buf[j];
+		j++;
+	}
+	new_line[i + j] = 0;
+	free(line);
+	return (new_line);
 }
