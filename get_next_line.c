@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:21 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/07 14:27:37 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/09 11:44:56 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,13 @@ char	*read_line(int fd, char *line, char *buf)
 		if (!line)
 			return (0);
 	}
+	printf("	exit loop\n");
 	free(buf);
+	printf("	buf freed\n");
 	if (found_nl(line))
 		return (split_nl(&line));
 	if (line[0] == 0)
-	{
-		printf("test\n");
 		return (gnl_free(line, 0));
-	}
 	return (line);
 }
 
