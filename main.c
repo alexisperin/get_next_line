@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:00:13 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/09 11:42:53 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/10 09:03:09 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ int	main(void)
 	printf("%s", line);
 	line = get_next_line(fd);
 	printf("%s", line);
-	/*
+
 	line = get_next_line(fd);
 	printf("%s", line);
 	line = get_next_line(fd);
 	printf("%s", line);
-	*/
 	/*
 	while (line)
 	{
