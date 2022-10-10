@@ -3,70 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
+/*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:21 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/10 09:24:07 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:38:09 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <stdio.h>
-
-char	*read_line(int fd, char *line, char *buf);
+char	*read_line(int fd, char **line, char **buf);
 char	*split_nl(char **str);
-char	*gnl_free(char *line, char *buf);
+char	*gnl_free(char **str1, char **str2);
 
 char	*get_next_line(int fd)
 {
-	static char	*line = 0;
+	static char	*rest = 0;
 	char		*buf;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
-	if (!line)
+	if (!rest)
 	{
-		line = ft_strndup("", 0);
-		if (!line)
+		rest = ft_strndup("", 0);
+		if (!rest)
 			return (0);
 	}
 	buf = malloc(BUFFER_SIZE * sizeof(char));
 	if (!buf)
-		return (gnl_free(line, 0));
-	printf("	buf malloc\n");
-	line = read_line(fd, line, buf);
+		return (gnl_free(&rest, 0));
+	line = read_line(fd, &rest, &buf);
+	if (!line)
+		return (0);
+	if (!found_nl(line))
+	{
+		line = ft_strndup(line, 0);
+		if (!line)
+			return (gnl_free(&rest, &buf));
+		free(rest);
+		rest = 0;
+	}
 	return (line);
 }
 
-char	*read_line(int fd, char *line, char *buf)
+char	*read_line(int fd, char **rest, char **buf)
 {
 	int		ret;
-	char	*res;
 
-	while (!found_nl(line))
+	while (!found_nl(*rest))
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
+		ret = read(fd, *buf, BUFFER_SIZE);
 		if (ret == -1)
-			return (gnl_free(line, buf));
+			return (gnl_free(rest, buf));
 		if (ret == 0)
 			break ;
-		line = ft_strjoin_and_free(line, buf, ret);
-		if (!line)
-			return (0);
+		*rest = ft_strjoin_and_free(*rest, *buf, ret);
+		if (!(*rest))
+			return (gnl_free(rest, buf));
 	}
-	printf("	free buf (read_line)\n");
-	free(buf);
-	printf("	buf freed (read_line)\n");
-	if (found_nl(line))
-	{
-		res = split_nl(&line);
-		free(line);
-		return (res);
-	}
-	if (line[0] == 0)
-		return (gnl_free(line, 0));
-	return (line);
+	free(*buf);
+	*buf = 0;
+	if (found_nl(*rest))
+		return (split_nl(rest));
+	if ((*rest)[0] == 0)
+		return (gnl_free(rest, 0));
+	return (*rest);
 }
 
 char	*split_nl(char **str)
@@ -81,27 +83,24 @@ char	*split_nl(char **str)
 		before_len++;
 	before_nl = ft_strndup(*str, before_len + 1);
 	if (!before_nl)
-		return (gnl_free(*str, 0));
+		return (gnl_free(str, 0));
 	after_len = 0;
 	while ((*str)[before_len + 1 + after_len])
 		after_len++;
 	after_nl = ft_strndup(*str + before_len + 1, after_len);
 	if (!after_nl)
-	{
-		gnl_free(*str, before_nl);
-		return (0);
-	}
-	printf("	free str (split_nl)\n");
+		return (gnl_free(str, &before_nl));
 	free(*str);
 	*str = after_nl;
 	return (before_nl);
 }
 
-char	*gnl_free(char *str1, char *str2)
+char	*gnl_free(char **str1, char **str2)
 {
-	printf("	free str1 (gnl_free)\n");
-	free(str1);
-	printf("	free str2 (gnl_free)\n");
-	free(str2);
+	printf("str1: %s\n", *str1);
+	if (**str1)
+		free(*str1);
+	if (**str2)
+		free(*str2);
 	return (0);
 }

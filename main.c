@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
+/*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:00:13 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/10 09:03:09 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/10 16:03:53 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,15 @@ int	main(void)
 {
 	int		fd;
 	char	*line;
+	int i = 0;
 
 	fd = open("test", O_RDONLY);
 	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-
-	line = get_next_line(fd);
-	printf("%s", line);
-	line = get_next_line(fd);
-	printf("%s", line);
-	/*
-	while (line)
+	while (i < 10)
 	{
 		printf("%s", line);
 		line = get_next_line(fd);
+		i++;
 	}
-	*/
 	close(fd);
 }
