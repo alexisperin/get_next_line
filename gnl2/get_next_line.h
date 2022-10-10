@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:16 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/10 19:21:58 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/10 21:45:55 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 16
 # endif
-
-# include <stdio.h> // A VIRER !!!
 
 # include <unistd.h>
 # include <stdlib.h>

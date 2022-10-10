@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:00:13 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/10 19:27:15 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/10 21:33:27 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(void)
 {
 	int		fd;
 	char	*line;
-	int i = 0;
 
 	fd = open("test", O_RDONLY);
 	line = get_next_line(fd);
@@ -28,7 +27,6 @@ int	main(void)
 	{
 		printf("%s", line);
 		line = get_next_line(fd);
-		i++;
 	}
 	close(fd);
 }

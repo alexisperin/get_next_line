@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:21 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/10 19:24:42 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/10 21:43:36 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,12 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (0);
 	if (!rest)
-	{
 		rest = ft_strndup("", 0);
-		if (!rest)
-			return (0);
-	}
 	buf = malloc(BUFFER_SIZE * sizeof(char));
-	if (!buf)
-		return (gnl_free(&rest, 0));
+	if (!rest || !buf)
+		return (gnl_free(&rest, &buf));
 	line = read_line(fd, &rest, &buf);
-	if (!line)
-		return (0);
-	if (!found_nl(line))
+	if (line && !found_nl(line))
 	{
 		line = ft_strndup(line, 0);
 		free(rest);
@@ -76,12 +70,12 @@ char	*split_nl(char **str)
 	if (!found_nl(*str))
 		return (*str);
 	before_len = 0;
+	after_len = 0;
 	while ((*str)[before_len] != '\n')
 		before_len++;
 	before_nl = ft_strndup(*str, before_len + 1);
 	if (!before_nl)
 		return (gnl_free(str, 0));
-	after_len = 0;
 	while ((*str)[before_len + 1 + after_len])
 		after_len++;
 	after_nl = ft_strndup(*str + before_len + 1, after_len);
