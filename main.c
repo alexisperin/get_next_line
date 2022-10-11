@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
+/*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:00:13 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/10 21:33:27 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/11 12:07:27 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int	main(void)
 	while (line)
 	{
 		printf("%s", line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
+	system("leaks a.out");
 }

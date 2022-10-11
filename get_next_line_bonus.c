@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 16:07:21 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/11 11:14:30 by aperin           ###   ########.fr       */
+/*   Created: 2022/10/11 11:07:01 by aperin            #+#    #+#             */
+/*   Updated: 2022/10/11 12:28:26 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_line(int fd, char **line, char **buf);
 char	*split_nl(char **str);
 
 char	*get_next_line(int fd)
 {
-	static char	*rest;
-	char		*buf;
-	char		*line;
+	static t_fdlist	*list;
+	char			*rest;
+	char			*buf;
+	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || BUFFER_SIZE > INT_MAX)
 		return (0);
+	rest = get_rest(&list, fd);
 	if (!rest)
-		rest = ft_strndup("", 0);
+		return (0);
 	buf = malloc(BUFFER_SIZE * sizeof(char));
-	if (!rest || !buf)
-		return (gnl_free(&rest, &buf));
+	if (!buf)
+		return (0);
 	line = read_line(fd, &rest, &buf);
 	if (line && !found_nl(line))
 	{
@@ -37,6 +39,32 @@ char	*get_next_line(int fd)
 		rest = 0;
 	}
 	return (line);
+}
+
+char	*get_rest(t_fdlist **list, int fd)
+{
+	t_fdlist	*tmp;
+
+	tmp = *list;
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			return (tmp->rest);
+		tmp = tmp->next;
+	}
+	tmp = malloc(sizeof(t_fdlist *));
+	if (!tmp)
+		return (0);
+	tmp->fd = fd;
+	tmp->rest = ft_strndup("", 0);
+	if (!tmp->rest)
+	{
+		free(tmp);
+		return (0);
+	}
+	tmp->next = *list;
+	*list = tmp;
+	return (tmp->rest);
 }
 
 char	*read_line(int fd, char **rest, char **buf)
