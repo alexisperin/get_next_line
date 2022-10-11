@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
+/*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:21 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/11 08:43:06 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/11 10:28:02 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "get_next_line.h"
 
 char	*read_line(int fd, char **line, char **buf);
@@ -21,7 +22,7 @@ char	*get_next_line(int fd)
 	char		*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || BUFFER_SIZE < 1 || BUFFER_SIZE > INT_MAX)
 		return (0);
 	if (!rest)
 		rest = ft_strndup("", 0);

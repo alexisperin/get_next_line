@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
+/*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:19 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/11 08:59:50 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/11 10:01:57 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 char	*gnl_free(char **str1, char **str2)
 {
 	if (str1)
+	{
 		free(*str1);
+		*str1 = 0;
+	}
 	if (str2)
+	{
 		free(*str2);
+		*str2 = 0;
+	}
 	return (0);
 }
 
