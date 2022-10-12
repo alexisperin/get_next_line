@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:11:27 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/11 11:35:03 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/12 16:35:16 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
-typedef struct s_fdlist
-{
-	int				fd;
-	char			*rest;
-	struct s_fdlist	*next;
-}					t_fdlist;
 
 char	*get_next_line(int fd);
 char	*gnl_free(char **str1, char **str2);
