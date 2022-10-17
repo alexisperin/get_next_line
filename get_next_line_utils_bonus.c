@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 11:11:11 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/11 11:11:14 by aperin           ###   ########.fr       */
+/*   Created: 2022/10/06 16:07:19 by aperin            #+#    #+#             */
+/*   Updated: 2022/10/17 16:08:04 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*gnl_free(char **str1, char **str2)
 {

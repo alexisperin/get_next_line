@@ -6,12 +6,12 @@
 /*   By: aperin <aperin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:07:01 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/12 16:43:50 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/17 15:58:19 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*read_line(int fd, char **line, char **buf);
 char	*split_nl(char **str);
