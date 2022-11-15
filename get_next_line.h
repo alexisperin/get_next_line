@@ -6,7 +6,7 @@
 /*   By: aperin <aperin@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:07:16 by aperin            #+#    #+#             */
-/*   Updated: 2022/10/10 21:45:55 by aperin           ###   ########.fr       */
+/*   Updated: 2022/10/27 17:54:26 by aperin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-char	*gnl_free(char **str1, char **str2);
+char	*gnl_free(char *str1, char *str2);
+size_t	ft_strlen(char *str);
 int		found_nl(char *str);
-char	*ft_strndup(char *str, int n);
-char	*ft_strjoin_and_free(char **line, char *buf, int buf_len);
+char	*strjoin_free(char *save, char *buf, size_t len);
 
 #endif
