@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	str = get_next_line(fd);
 	while (str)
 	{
-		printf("%s\n", str);
+		printf("%s", str);
 		free(str);
 		str = get_next_line(fd);
 	}
